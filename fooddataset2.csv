@@ -1,0 +1,39 @@
+Calories,Carbs,Protein,Sugar,Fat,Age,Weight,Height,Diet,Allergies,Health,Suitability
+70,20,30,50,10,27,68,162, Gluten-Free, None, None,78
+85,25,40,70,15,32,72,168, Dairy-Free, Fish, None,73
+95,30,50,80,20,42,85,175, Vegetarian, Nuts, None,65
+105,35,60,100,30,52,92,180, Vegan, None, High Cholesterol,58
+50,15,15,30,5,20,60,155, Keto, Shellfish, None,88
+75,20,30,60,10,29,70,165, Gluten-Free, None, High Calorie,76
+90,28,40,80,25,37,78,170, Dairy-Free, Fish, None,70
+65,18,25,40,10,24,63,158, Vegetarian, None, Diabetic,82
+110,40,65,120,40,47,88,178, Vegan, Nuts, None,62
+55,13,18,15,7,23,62,160, Keto, Shellfish, High Cholesterol,84
+80,22,32,70,13,30,72,170, Gluten-Free, None, None,74
+100,32,45,90,22,38,80,172, Dairy-Free, Fish, High Calorie,68
+75,20,20,50,5,30,70,170, Gluten-Free, Nuts, Diabetic,75
+100,30,40,100,20,45,80,175, Dairy-Free, None, High Cholesterol,60
+50,10,10,20,10,25,65,160, Vegetarian, Fish, High Calorie,80
+60,15,30,30,15,35,75,168, Vegan, None, None,90
+90,25,50,70,30,50,90,180, Keto, Shellfish, High Cholesterol,70
+80,22,35,80,12,28,72,175, Dairy-Free, None, High Calorie,65
+70,18,30,40,8,33,68,165, Vegetarian, None, None,85
+110,35,60,120,35,40,85,178, Vegan, None, High Cholesterol,55
+95,28,55,65,28,55,95,182, Keto, None, Diabetic,72
+55,12,15,10,6,22,60,155, Gluten-Free, Fish, None,92
+105,33,48,110,32,38,78,170, Dairy-Free, None, High Calorie,68
+70,20,30,60,10,27,68,162, Gluten-Free, None, None,78
+85,25,40,70,15,32,72,168, Dairy-Free, Fish, None,73
+95,30,50,80,20,42,85,175, Vegetarian, Nuts, None,65
+105,35,60,100,30,52,92,180, Vegan, None, High Cholesterol,58
+50,15,15,30,5,20,60,155, Keto, Shellfish, None,88
+75,20,30,60,10,29,70,165, Gluten-Free, None, High Calorie,76
+90,28,40,80,25,37,78,170, Dairy-Free, Fish, None,70
+65,18,25,40,10,24,63,158, Vegetarian, None, Diabetic,82
+110,40,65,120,40,47,88,178, Vegan, Nuts, None,62
+55,13,18,15,7,23,62,160, Keto, Shellfish, High Cholesterol,84
+80,22,32,70,13,30,72,170, Gluten-Free, None, None,74
+100,32,45,90,22,38,80,172, Dairy-Free, Fish, High Calorie,68
+70,20,30,60,10,27,68,162, Gluten-Free, None, None,78
+85,25,40,70,15,32,72,168, Dairy-Free, Fish, None,73
+95,30,50,80,20,42,85,175, Vegetarian, Nuts, None,65
