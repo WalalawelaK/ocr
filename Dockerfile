@@ -5,7 +5,7 @@ WORKDIR /app
 # install requirements
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-RUN apt-get update && apt-get install -y tesseract-ocr    
+RUN apt-get update && apt-get install -y tesseract-ocr libgl1-mesa-glx  
 
 COPY . .
 
