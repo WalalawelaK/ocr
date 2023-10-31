@@ -1,38 +1,78 @@
-from flask import Flask, request, jsonify
+
+
+# ------------------------Chathini----------------------
+from flask import Flask, flash, request, redirect, url_for, render_template
+import pandas as pd
+import pickle
+import json
+
+# ------------------------Chathini end----------------------
+
+# ------------------------Kaveesha--------------------------
+
 import pytesseract
 from PIL import Image
-# import cv2
-# from ocr_core import ocr_core
+import cv2
+
+# ------------------------Kaveesha End----------------------
+
+
+# ------------------------Image Upload----------------------
+import urllib.request
+import os
+from werkzeug.utils import secure_filename
+
+# ------------------------Image Upload----------------------
+
 
 app = Flask(__name__)
 
-@app.route('/ocr', methods=['GET'])
-def ocr():
-    # try:
-        # Get the uploaded image from the request
-        # image = request.files['image']
-        print("hello this ")
 
-        sub = "grttt"
-        # Perform OCR using Tesseract
-        print(Image.open("text2.jpg"))
+# ------------------------Image Upload----------------------
+UPLOAD_FOLDER = 'static/uploads/'
+ 
+app.secret_key = "secret key"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+ 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+     
+ 
+@app.route('/')
+def home():
+    return render_template('index.html')
+ 
+@app.route('/', methods=['POST'])
+def upload_image():
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename("text.jpg")
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #print('upload_image filename: ' + filename)
+        flash('Image successfully uploaded and displayed below')
+        return render_template('index.html', filename=filename)
+    else:
+        flash('Allowed image types are - png, jpg, jpeg, gif')
+        return redirect(request.url)
+ 
+@app.route('/display/<filename>')
+def display_image(filename):
+    #print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-        # myconfig = r"--psm 6 --oem 3"
 
-        # myconfig = r'--oem 3 --psm 7 -c tessedit_char_whitelist=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+# ------------------------Image Upload  END----------------------
 
-        myconfig = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-
-        text = pytesseract.image_to_string(Image.open("text3.jpeg"), config=myconfig)
-        
-        print(text)
-
-        # Return the extracted text as JSON
-        # return jsonify({'text': text})
-        return text
-    # except Exception as e:
-    #     return jsonify({'error': str(e)})
-
+# ------------------------Foodprediction Chathini----------------------
 @app.route('/foodcheck', methods=['GET', 'POST'])
 def quzesselect():
 
@@ -69,7 +109,7 @@ def quzesselect():
     # inputs['Weight_n'] = le_Weight.fit_transform(inputs['Weight'])
     # inputs['Age_n'] = le_Age.fit_transform(inputs['Age'])
     inputs['Gender_n'] = le_Diet.fit_transform(inputs['Diet'])
-    inputs['FavoriteColor_n'] = le_Allergies.fit_transform(inputs['Allergies'])
+    inputs['FavoriteColor_n'] = le_Allergies.fit_transform(inputs['Allergies'])   # catogorical variable handling 
     inputs['FunctionType_n'] = le_Health.fit_transform(inputs['Health'])
     # inputs['FunctionTime_n'] = le_FunctionTime.fit_transform(inputs['FunctionTime'])
     inputs.head()
@@ -81,11 +121,11 @@ def quzesselect():
 
     model = tree.DecisionTreeClassifier()
 
-    model.fit(inputs_n,target)
+    model.fit(inputs_n,target) #train the model
 
-    model.score(inputs_n, target)
+    model.score(inputs_n, target)# test accuracy 
 
-    output = model.predict([[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11]])
+    output = model.predict([[v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11]]) #get prediction 
     # output = "test"
     # result = {"prediction": output.tolist()}
     # json_data = json.dumps(result)
@@ -94,7 +134,39 @@ def quzesselect():
     return (format(output))
     # return json_data
     # print(output)
+    
+# ------------------------Foodprediction Chathini----------------------
 
+#--------------------------Item List Sacn Predict - Kaveesha  -----------------------------
+@app.route('/ocr', methods=['GET'])
+def ocr():
+    # try:
+        # Get the uploaded image from the request
+        # image = request.files['image']
+        print("hello this ")
 
+        sub = "grttt"
+        # Perform OCR using Tesseract
+        print(Image.open("text2.jpg"))
+
+        # myconfig = r"--psm 6 --oem 3"
+
+        # myconfig = r'--oem 3 --psm 7 -c tessedit_char_whitelist=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+        myconfig = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+        text = pytesseract.image_to_string(Image.open("static\\uploads\\text.jpg"), config=myconfig)
+        
+        print(text)
+
+        # Return the extracted text as JSON
+        # return jsonify({'text': text})
+        return text
+    # except Exception as e:
+    #     return jsonify({'error': str(e)})
+    
+    #--------------------------Item List Sacn Predict - Kaveesha  END-----------------------------
+  
 if __name__ == '__main__':
-    app.run()
+
+  app.run(debug=True, port=5000)
