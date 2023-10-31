@@ -144,6 +144,8 @@ def ocr():
         # Get the uploaded image from the request
         # image = request.files['image']
         print("hello this ")
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(current_directory, "static", "uploads", "text.jpg")
 
         sub = "grttt"
         # Perform OCR using Tesseract
@@ -155,7 +157,7 @@ def ocr():
 
         myconfig = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
-        text = pytesseract.image_to_string(Image.open("static\\uploads\\text.jpg"), config=myconfig)
+        text = pytesseract.image_to_string(Image.open(image_path), config=myconfig)
         
         print(text)
 
